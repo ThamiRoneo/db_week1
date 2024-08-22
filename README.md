@@ -16,64 +16,129 @@ This assignment is designed to be completed in approximately 2 hours.
 
 ### What you’ll need:
 - Access to a computer with internet access
-- A text editor (e.g., Microsoft Word)
+- A code editor (e.g., Visual Studi Code)
 - Drawing software (e.g., Draw.io, Visual Paradigm) for the bonus question.
 
 <br/>
   
 ## Submission
-- Save your completed assignment as a document (e.g., .docx, .pdf).
-- Submit your document through the designated course platform.
+- Clone the project on your local computer
+- Create a file named ```answers.sql```
+- Run the queries on MySQL workbench and once they are successfull copy and paste on the ```answers.sql``` file on VS code
+- Make sure you clearly comment your answers. Example:
+```sql
+-- question 1.1
+CREATE TABLE table_0 (
+    column1 datatype,
+    column2 datatype
+);
+
+-- question 1.2
+CREATE TABLE table_1 (
+    column1 datatype,
+    column2 datatype
+);
+```
+- Once you finish the assignment, push the code to github
 
 <br/>
   
-## Part 1: Understanding SQL (30 minutes)
-### Research
-Use online resources like websites or PowerPoint slides.
-
-### Web Applications
-Imagine a dynamic website like an online store. How do you think SQL plays a role in managing data behind the scenes? Consider how product information, user accounts, and order details might be stored and accessed.
-
-### Questions:
-**1.1)** In a single Word document, summarize your findings in a short paragraph (3-5 sentences).
-
-**1.2)** Write a short explanation (3-5 sentences) in your document about the role of SQL in web applications.
-
-**1.3)** List 3 benefits of using SQL for web applications.
-
-**1.4)** Think about efficiency, data organization, and data retrieval capabilities. Briefly explain each benefit in your document (1-2 sentences per benefit).
-
-**1.5)** List any 3 Database Management Systems.
+## Part 1: Database Modelling
+Using a software of choice eg. draw.io, lucid chart etc, draw a well defined Entity Relationship Diagram (ERD) of the database whose fields are outlined below. Once you are done export or download the diagram in pdf format and upload it on the repository or you can copy and paste it to the cloned repository before you push the changes
 
 <br/><br/>
+**Table Name:** patients
+| FIELD | DATA TYPE | CONSTRAINTS |
+|------------|--------------|-----------------|
+| patient_id | INT | PRIMARY KEY, AUTO INCREMENT |
+| first_name | VARCHAR | NOT NULL|
+| last_name | VARCHAR | NOT NULL |
+| date_of_birth | DATE | NOT NULL |
+| gender | VARCHAR | NOT NULL |
+| language | VARCHAR | NOT NULL |
 
-## Part 2: Database Fundamentals (45 minutes)
-### Questions:
-**2.1)** Tables - Think about how data is organized in rows and columns. In your document, define a database table and explain its similarity to a spreadsheet (2-3 sentences).
-
-**2.2)** Columns - Consider different types of data like text, numbers, and dates. Define "columns" and provide an example with an explanation (2-3 sentences) in your document.
-
-**2.3)** Data Types - Why are data types important in a database? Briefly explain 3 common data types (e.g., Text, Number, Date). Think about how data types ensure data integrity and efficient storage. Explain the importance of data types and provide brief explanations of 3 common types (2-3 sentences each) in your document.
 
 <br/><br/>
- 
-## Part 3: Project Database Design (45 minutes)
-### Questions:
-**3.1)** Planning - We’ll be building a data-driven application. What kind of information do you think we’ll need to track? List at least 5 data points relevant to our project. Consider information like amount, date, category, etc. List your identified data points in your document.
+**Table Name:** providers
+| FIELD | DATA TYPE | CONSTRAINTS |
+|------------|--------------|-----------------|
+| provider_id | INT | PRIMARY KEY, AUTO INCREMENT |
+| first_name | VARCHAR | NOT NULL |
+| second_name | VARCHAR | NOT NULL |
+| speciality | VARCHAR | NOT NULL |
+| date_on_staff | DATE | NOT NULL |
 
-**3.2)** Tables - Considering the data points you listed, design a basic database schema with one main table.
-Define the columns needed for this table.
-Assign appropriate data types to each column based on the kind of data it will hold (e.g., amount: number, date: date, category: text).
-In your document, create a table structure that includes:
+<br/><br/>
+**Table Name:** visits
+| FIELD | DATA TYPE | CONSTRAINTS |
+|------------|--------------|-----------------|
+| visit_id | INT | PRIMARY KEY, AUTO INCREMENT |
+| patient_id | INT | FOREIGN KEY REFERENCES patients(patient_id) |
+| provider_id | INT | FOREIGN KEY REFERENCES providers(provider_id) |
+| date_of_visit | DATE | NOT NULL |
+| date_scheduled | DATE | NOT NULL |
+| visit_department_id | INT | NOT |
+| visit_type | VARCHAR | NOT NULL |
+| blood_pressure_systollic | INT | |
+| blood_pressure_diastollic | DECIMAL | |
+| pulse | DECIMAL |  |
+| visit_status | VARCHAR | NOT NULL|
 
-Table name (e.g., Records)
-Column names (e.g., record_id, amount, date, category)
-Data type for each column (e.g., INT, DECIMAL, DATE, TEXT)
-Bonus:
-Sketch a simple Entity Relational Diagram (ERD) of your table structure, including column names and data types. Use drawing software or a simple table format to visually represent your schema.
+<br/><br/>
+**Table Name:** ed_visits
+| FIELD | DATA TYPE | CONSTRAINTS |
+|------------|--------------|-----------------|
+| ed_visit_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| visit_id | INT | FOREIGN KEY REFERENCES visits(visit_id) |
+| patient_id | INT | FOREIGN KEY REFERENCES patients(patient_id) |
+| acuity | INT | NOT NULL |
+| reason_for_visit | VARCHAR | NOT NULL |
+| disposition | VARCHAR | NOT NULL |
 
+<br/><br/>
+**Table Name:** admissions
+| FIELD | DATA TYPE | CONSTRAINTS |
+|------------|--------------|-----------------|
+| admission_id | INT | PRIMARY KEY, AUTO_INCREMENT |
+| patient_id | INT | FOREIGN KEY REFERENCE patients(patients_id) |
+| admission_date | DATE | NOT NULL |
+| discharge_date | DATE | NOT NULL |
+| discharge_disposition | VARCHAR | NOT NULL |
+| service | VARCHAR | NOT NULL |
+| primary_diagnosis | VARCHAR | NOT NULL |
+
+
+<br/><br/>
+**Table Name:** discharges
+| FIELD | DATA TYPE | CONSTRAINTS |
+|------------|--------------|-----------------|
+| discharge_id | INT | PRIMARY_KEY, AUTO_INCREMENT |
+| admission_id | INT | FOREIGN KEY REFERENCES admissions(admission_id) |
+| patient_id | INT | FOREIGN KEY REFERENCES patients(patients_id) |
+| discharge_date | DATE | NOT NULL|
+| discharge_disposition | VARCHAR | NOT NULL |
+
+<br/><br/>
+## Part 2: Creating a database
+Now that you have already created a model of your database, it is time to bring it start building on it. Create database named ```hospital_db```.
+
+<br/><br/>
+## Part 3: Creating Tables
+After creating your your database the next step is creating your tables, but before we start making any changes to the database, we need to make sure it is selected. Select the database using the ```USE``` keyword.<br/>
+After selecting the databse proceed to create the tables using the information provided in the tables above. For Example
+```sql
+CREATE TABLE patients(
+    patient_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    date_of_birth DATE NOT NULL
+    gender VARCHAR(10)
+    language VARCHAR(20) NOT NULL
+);
+```
+
+<br/><br/>
+## NOTE: You should not fork the repository
 Remember: There might be multiple ways to design your database schema. The goal is to understand the concepts and create a logical structure to store your project data.
 
-<br/><br/>
 
-# WELL DONE!
