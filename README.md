@@ -16,7 +16,7 @@ This assignment is designed to be completed in approximately 2 hours.
 
 ### What you’ll need:
 - Access to a computer with internet access
-- A code editor (e.g., Visual Studi Code)
+- A code editor (e.g., Visual Studio Code)
 - Drawing software (e.g., Draw.io, Visual Paradigm) for the bonus question.
 
 <br/>
@@ -50,7 +50,7 @@ Using a software of choice eg. draw.io, lucid chart etc, draw a well defined Ent
 **Table Name:** patients
 | FIELD | DATA TYPE | CONSTRAINTS |
 |------------|--------------|-----------------|
-| patient_id | INT | PRIMARY KEY, AUTO INCREMENT |
+| patient_id | INT | PRIMARY KEY, AUTO_INCREMENT |
 | first_name | VARCHAR | NOT NULL|
 | last_name | VARCHAR | NOT NULL |
 | date_of_birth | DATE | NOT NULL |
@@ -62,17 +62,19 @@ Using a software of choice eg. draw.io, lucid chart etc, draw a well defined Ent
 **Table Name:** providers
 | FIELD | DATA TYPE | CONSTRAINTS |
 |------------|--------------|-----------------|
-| provider_id | INT | PRIMARY KEY, AUTO INCREMENT |
+| provider_id | INT | PRIMARY KEY AUTO_INCREMENT |
 | first_name | VARCHAR | NOT NULL |
-| second_name | VARCHAR | NOT NULL |
-| speciality | VARCHAR | NOT NULL |
-| date_on_staff | DATE | NOT NULL |
+| last_name | VARCHAR | NOT NULL |
+| provider_speciality | VARCHAR | NOT NULL |
+| email_address | VARCHAR |  |
+| phone_number | VARCHAR |  |
+| date_joined | DATE | NOT NULL |
 
 <br/><br/>
 **Table Name:** visits
 | FIELD | DATA TYPE | CONSTRAINTS |
 |------------|--------------|-----------------|
-| visit_id | INT | PRIMARY KEY, AUTO INCREMENT |
+| visit_id | INT | PRIMARY KEY, AUTO_INCREMENT |
 | patient_id | INT | FOREIGN KEY REFERENCES patients(patient_id) |
 | provider_id | INT | FOREIGN KEY REFERENCES providers(provider_id) |
 | date_of_visit | DATE | NOT NULL |
