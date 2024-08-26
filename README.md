@@ -39,6 +39,7 @@ CREATE TABLE table_1 (
     column2 datatype
 );
 ```
+- Choose a software like draw.io or any software of your choice. Once you are done with drawing the ERD as expected in Part 1 of the assignment export the drawing and move it to folder which you have cloned.
 - Once you finish the assignment, push the code to github
 
 <br/>
@@ -75,8 +76,8 @@ Using a software of choice eg. draw.io, lucid chart etc, draw a well defined Ent
 | FIELD | DATA TYPE | CONSTRAINTS |
 |------------|--------------|-----------------|
 | visit_id | INT | PRIMARY KEY, AUTO_INCREMENT |
-| patient_id | INT | FOREIGN KEY REFERENCES patients(patient_id) |
-| provider_id | INT | FOREIGN KEY REFERENCES providers(provider_id) |
+| patient_id | INT | NOT NULL |
+| provider_id | INT | NOT NULL |
 | date_of_visit | DATE | NOT NULL |
 | date_scheduled | DATE | NOT NULL |
 | visit_department_id | INT | NOT |
@@ -91,8 +92,8 @@ Using a software of choice eg. draw.io, lucid chart etc, draw a well defined Ent
 | FIELD | DATA TYPE | CONSTRAINTS |
 |------------|--------------|-----------------|
 | ed_visit_id | INT | PRIMARY KEY, AUTO_INCREMENT |
-| visit_id | INT | FOREIGN KEY REFERENCES visits(visit_id) |
-| patient_id | INT | FOREIGN KEY REFERENCES patients(patient_id) |
+| visit_id | INT | NOT NULL |
+| patient_id | INT | NOT NULL |
 | acuity | INT | NOT NULL |
 | reason_for_visit | VARCHAR | NOT NULL |
 | disposition | VARCHAR | NOT NULL |
@@ -102,7 +103,7 @@ Using a software of choice eg. draw.io, lucid chart etc, draw a well defined Ent
 | FIELD | DATA TYPE | CONSTRAINTS |
 |------------|--------------|-----------------|
 | admission_id | INT | PRIMARY KEY, AUTO_INCREMENT |
-| patient_id | INT | FOREIGN KEY REFERENCE patients(patients_id) |
+| patient_id | INT | NOT NULL |
 | admission_date | DATE | NOT NULL |
 | discharge_date | DATE | NOT NULL |
 | discharge_disposition | VARCHAR | NOT NULL |
@@ -115,8 +116,8 @@ Using a software of choice eg. draw.io, lucid chart etc, draw a well defined Ent
 | FIELD | DATA TYPE | CONSTRAINTS |
 |------------|--------------|-----------------|
 | discharge_id | INT | PRIMARY_KEY, AUTO_INCREMENT |
-| admission_id | INT | FOREIGN KEY REFERENCES admissions(admission_id) |
-| patient_id | INT | FOREIGN KEY REFERENCES patients(patients_id) |
+| admission_id | INT | NOT NULL |
+| patient_id | INT | NOT NULL |
 | discharge_date | DATE | NOT NULL|
 | discharge_disposition | VARCHAR | NOT NULL |
 
