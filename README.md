@@ -105,8 +105,6 @@ Using a software of choice eg. draw.io, lucid chart etc, draw a well defined Ent
 | admission_id | INT | PRIMARY KEY, AUTO_INCREMENT |
 | patient_id | INT | NOT NULL |
 | admission_date | DATE | NOT NULL |
-| discharge_date | DATE | NOT NULL |
-| discharge_disposition | VARCHAR | NOT NULL |
 | service | VARCHAR | NOT NULL |
 | primary_diagnosis | VARCHAR | NOT NULL |
 
